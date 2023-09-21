@@ -1,7 +1,9 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const Product = require("./models/productModel")
 const app = express();
+const dbUrl = process.env.DATABASE_URL;
 
 //middleware
 app.use(express.json())
@@ -27,7 +29,7 @@ app.post("/product", async (req,res) =>{
 
 mongoose
   .connect(
-    "mongodb+srv://admin:012345Admin@crudapi.zqugxvj.mongodb.net/Crud-API?retryWrites=true&w=majority"
+    `${dbUrl}`
   )
   .then(() => {
     console.log("Successfuly connected to mongoDb");
